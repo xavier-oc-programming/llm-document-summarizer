@@ -18,6 +18,25 @@ PDF document summarization powered by Amazon Bedrock (Claude Haiku) with product
 
 ---
 
+## Table of Contents
+
+- [0. Prerequisites](#0-prerequisites)
+- [1. Quick Start](#1-quick-start)
+- [2. Project Structure](#2-project-structure)
+- [3. LLMOps Patterns](#3-llmops-patterns)
+- [4. Prompt Versioning](#4-prompt-versioning)
+- [5. Evaluation Pipeline](#5-evaluation-pipeline)
+- [6. Bedrock Guardrails](#6-bedrock-guardrails)
+- [7. API Reference](#7-api-reference)
+- [8. MLflow Experiment Tracking](#8-mlflow-experiment-tracking)
+- [9. Docker Compose Architecture](#9-docker-compose-architecture)
+- [10. Deployment — Azure App Service](#10-deployment--azure-app-service)
+- [11. CI/CD](#11-cicd)
+- [12. Design Decisions](#12-design-decisions)
+- [13. Dependencies](#13-dependencies)
+
+---
+
 ## 0. Prerequisites
 
 - **AWS account** with Amazon Bedrock enabled in `us-east-1`
