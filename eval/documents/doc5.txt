@@ -1,0 +1,36 @@
+streamparse — Lightweight Stream Processing for Python
+
+Overview
+
+streamparse is an open-source Python library for building real-time data processing pipelines. It provides a simple, composable API for defining processing steps as functions, chaining them into pipelines, and running them over streaming data sources — from Kafka topics and Redis queues to local CSV files and generator functions.
+
+The library is designed for teams who need stream processing capabilities without the operational overhead of Apache Flink or Spark Streaming. It runs as a single Python process with optional multi-threading for I/O-bound stages.
+
+Installation
+
+pip install streamparse
+
+Requires Python 3.10 or later. Optional dependencies:
+- pip install streamparse[kafka] — Apache Kafka source/sink support
+- pip install streamparse[redis] — Redis queue source/sink support
+
+Key Features
+
+Composable pipeline DSL: define pipelines as chains of typed transformations using the >> operator. Type hints are enforced at pipeline construction time, catching schema mismatches before runtime.
+
+Built-in windowing: tumbling and sliding window aggregations with configurable window size and slide interval. Windows emit automatically when full or on a configurable timeout for sparse streams.
+
+Exactly-once semantics: checkpointing to local disk or S3 ensures processing resumes from the last committed offset after a crash, without reprocessing or skipping records.
+
+Dead-letter queue: records that fail processing after configurable retries are routed to a dead-letter destination for inspection and reprocessing, rather than blocking the pipeline.
+
+Observability: built-in Prometheus metrics endpoint exposes throughput, latency percentiles, error rates, and checkpoint lag per pipeline stage.
+
+Quick Start
+
+from streamparse import Pipeline, KafkaSource, ConsoleSink
+
+pipeline = Pipeline(KafkaSource("orders")) >> filter_valid >> enrich_customer >> ConsoleSink()
+pipeline.run()
+
+License: Apache 2.0. Contributions welcome via GitHub pull request.

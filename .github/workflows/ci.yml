@@ -1,0 +1,40 @@
+# CI pipeline — runs on every push to main
+# Tests do not require AWS credentials — /summarize/text returns 503
+# gracefully when credentials are absent, which is acceptable in CI.
+# evaluate.py is NOT run in CI — requires live AWS Bedrock access.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+      - name: Check prompt files exist
+        run: |
+          test -f prompts/v1_summarize.yaml && echo "v1 OK"
+          test -f prompts/v2_summarize.yaml && echo "v2 OK"
+          test -f prompts/v3_summarize.yaml && echo "v3 OK"
+
+      - name: Check eval set exists
+        run: |
+          test -f eval/documents/doc1.txt && echo "eval set OK"
+          test -f eval/references/ref1.txt && echo "references OK"

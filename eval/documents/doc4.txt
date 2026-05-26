@@ -1,0 +1,27 @@
+NOTICE OF TERMS OF SERVICE UPDATE — EFFECTIVE 1 JULY 2026
+
+CloudVault Storage Services — Terms of Service Amendment
+
+Dear CloudVault User,
+
+We are updating our Terms of Service, effective 1 July 2026. Please read this notice carefully as several changes affect how your data is stored, processed, and retained.
+
+KEY CHANGES
+
+1. Data Retention Policy (Section 4.2)
+The free tier data retention period is changing from 90 days to 30 days for inactive accounts. An account is considered inactive if no files have been accessed, uploaded, or downloaded in the preceding 30-day period. Users will receive a 14-day email warning before any data deletion occurs.
+
+2. Third-Party Data Processing (Section 7.1)
+CloudVault will share aggregated, anonymised usage metadata with third-party analytics partners to improve service performance. Individual file contents are not shared. Users may opt out of metadata sharing via Account Settings → Privacy → Analytics Sharing.
+
+3. API Rate Limits (Section 9.3)
+Free tier API calls are now limited to 500 requests per day, down from 1,000. Paid tier limits remain unchanged at 50,000 requests per day. Users exceeding the free tier limit will receive a 429 error and may upgrade to a paid plan at any time.
+
+4. Dispute Resolution (Section 12)
+All disputes are now subject to binding arbitration in the jurisdiction of California, United States, replacing the previous choice-of-court provisions.
+
+WHAT YOU NEED TO DO
+
+No action is required to continue using CloudVault. If you do not wish to accept these updated terms, you must delete your account before 1 July 2026. Continued use after the effective date constitutes acceptance of the updated terms.
+
+For questions, contact support@cloudvault.example.com.

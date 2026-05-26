@@ -1,0 +1,17 @@
+ABSTRACT: Predicting Customer Churn in Subscription Services Using Ensemble Methods and Behavioural Feature Engineering
+
+Background and Motivation
+
+Customer churn prediction is a critical business intelligence task for subscription-based companies. Traditional logistic regression models applied to demographic features have demonstrated limited predictive power, achieving AUC scores of approximately 0.68–0.72 on benchmark datasets. This paper investigates whether incorporating behavioural engagement features — specifically, session frequency, feature adoption breadth, and support ticket sentiment — substantially improves churn prediction accuracy.
+
+Methodology
+
+We trained and evaluated five model architectures (logistic regression, random forest, gradient boosting, XGBoost, and a two-layer neural network) on a proprietary dataset of 84,000 B2B SaaS customers observed over 18 months. Features were engineered from clickstream logs, CRM records, and support ticket text. BERT embeddings were used to encode support ticket sentiment. Models were evaluated using 5-fold stratified cross-validation with AUC-ROC as the primary metric.
+
+Results
+
+The XGBoost model with behavioural features achieved AUC-ROC of 0.891, compared to 0.714 for the baseline logistic regression on demographic features only. Feature importance analysis identified session frequency in the 30 days prior to renewal as the single strongest predictor (SHAP value 0.34). Support ticket sentiment in the 60-day pre-renewal window ranked second (SHAP value 0.28).
+
+Implications
+
+These findings suggest that real-time behavioural monitoring in the pre-renewal window provides substantially more predictive signal than static demographic profiling. Practitioners should prioritise instrumentation of product engagement events over additional customer demographic data collection. The model has been deployed in production at the partner organisation with an estimated $2.3 million annual reduction in avoidable churn.

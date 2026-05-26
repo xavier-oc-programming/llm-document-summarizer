@@ -1,0 +1,59 @@
+title: LLM Document Summarizer — LLMOps with Amazon Bedrock
+slug: llm-document-summarizer
+category: data
+date: 2026-05-26
+featured: false
+tags: LLM, RAG, AWS, azure, deployment, flask, web-app, zero-shot, benchmarking, model-registry, jupyter, REST-API, docker, CI-CD, deep-learning, NLP, feature-engineering
+tech_stack: Python, Amazon Bedrock, Bedrock Guardrails, MLflow, FastAPI, PyMuPDF, PyYAML, rouge-score, Uvicorn, Docker, Docker Compose, Pandas, Azure App Service, GitHub Actions, pytest
+repo_url: https://github.com/xavier-oc-programming/llm-document-summarizer
+live_url: https://llm-document-summarizer.azurewebsites.net
+demo_url: https://llm-document-summarizer.azurewebsites.net/docs
+short_description: |
+  PDF document summarizer using Amazon Bedrock (Claude Haiku) with production
+  LLMOps patterns: versioned YAML prompt templates, automated ROUGE evaluation,
+  Bedrock Guardrails for PII redaction, and MLflow tracking of every inference
+  call. Deployed on Azure App Service.
+full_description: |
+  A production document summarization system demonstrating four LLMOps patterns:
+  prompt versioning, automated evaluation, guardrails, and experiment tracking.
+
+  Prompt templates are stored as versioned YAML files (v1, v2, v3) in a prompts/
+  directory. Switching the active version is a single config change — no code
+  deployment required. An evaluation pipeline (evaluate.py) runs all prompt
+  versions against a held-out set of documents with human-written reference
+  summaries and computes ROUGE scores. Results are logged to MLflow alongside
+  every production inference call — latency, prompt version, guardrails activity,
+  and input/output length.
+
+  Bedrock Guardrails are applied to every response: PII (names, emails, phone
+  numbers) is anonymised before the summary reaches the user, and harmful content
+  is blocked. Every guardrail action is logged to MLflow for monitoring.
+
+  Served via FastAPI with auto-generated OpenAPI docs at /docs. Runs locally via
+  Docker Compose (API + MLflow tracking server). GitHub Actions CI runs pytest on
+  every push.
+
+problem: |
+  Demonstrating the gap between an LLM wrapper (call an API, return the result)
+  and a production LLMOps system (version prompts, evaluate quality, enforce
+  guardrails, track everything) — and implementing all four production patterns
+  in a single deployable application.
+
+solution: |
+  Three versioned prompt templates in prompts/. evaluate.py runs ROUGE scoring
+  across all versions on a committed eval set and logs to MLflow. bedrock_client.py
+  applies Bedrock Guardrails to every call and logs all metadata. FastAPI serves
+  POST /summarize (PDF upload) and POST /summarize/text. Docker Compose runs
+  API + MLflow server.
+
+challenges: |
+  Bedrock Guardrails require a guardrail to be created in the AWS console before
+  the project runs — the guardrail ID is a config value, not a code value.
+  ROUGE metrics measure lexical overlap, not semantic quality — the eval set and
+  reference summaries must be written carefully to make the scores meaningful.
+  Prompt templates use Python .format()-style placeholders inside JSON structures,
+  which requires escaping curly braces in the JSON schema to prevent format errors.
+
+results: |
+  TBD — populate after running evaluate.py. Include: ROUGE-L scores for v1, v2, v3,
+  winning prompt version, average latency, guardrails firing rate on eval set.

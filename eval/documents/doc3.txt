@@ -1,0 +1,15 @@
+DATABRIDGE ANNOUNCES $200M SERIES C, TARGETS ENTERPRISE DATA FABRIC MARKET
+
+SAN FRANCISCO — DataBridge, the enterprise data integration platform, today announced a $200 million Series C funding round led by Sequoia Capital, with participation from existing investors Andreessen Horowitz and Index Ventures. The round values the company at $1.4 billion, making DataBridge the latest entrant to the enterprise software unicorn club.
+
+The funding will accelerate product development and international expansion, with DataBridge targeting market entry in Germany, Japan, and Australia over the next 18 months. The company currently serves 340 enterprise customers across North America and the United Kingdom.
+
+"Enterprise data teams are drowning in complexity — they have data in 40 different systems and no reliable way to unify it," said DataBridge CEO Priya Nair. "We've built the connective tissue the modern data stack has been missing."
+
+DataBridge reported annualised recurring revenue of $68 million, up 187% year-over-year, with net revenue retention of 138%. The company's platform connects to more than 200 data sources and processes an average of 4.2 billion events per day across its customer base.
+
+The announcement comes amid a broader wave of consolidation in the data infrastructure sector. Three major database vendors have made acquisitions in the integration space in the past six months, signalling growing recognition of data connectivity as a strategic priority.
+
+Analysts noted that DataBridge's high net revenue retention distinguishes it from earlier-stage competitors. "An NRR of 138% means customers are not just staying — they're dramatically expanding usage," said Redpoint analyst Marcus Chen. "That's the strongest signal of genuine enterprise value creation."
+
+DataBridge expects to reach profitability by Q2 2026.

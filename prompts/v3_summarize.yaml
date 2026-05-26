@@ -1,0 +1,25 @@
+---
+version: v3
+created: 2026-05-26
+description: "Extended prompt — adds risk flags and audience targeting"
+template: |
+  You are a senior document analyst. Analyse the following document
+  for a professional audience.
+
+  Document:
+  {document_text}
+
+  Respond with only a JSON object with these exact keys:
+  {{
+    "document_type": "contract, report, research, news, legal, or other",
+    "target_audience": "who this document is written for",
+    "summary": "2-3 sentence overview",
+    "key_points": ["point 1", "point 2", "point 3", "point 4", "point 5"],
+    "main_argument": "the central claim or finding",
+    "sentiment": "positive, negative, or neutral",
+    "confidence": "high, medium, or low",
+    "risk_flags": ["any concerning elements, commitments, or red flags — empty list if none"],
+    "recommended_action": "one specific actionable next step"
+  }}
+
+  Do not include any text outside the JSON object.

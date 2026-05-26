@@ -1,0 +1,21 @@
+---
+version: v1
+created: 2026-05-26
+description: "Initial prompt — structured summary with key points"
+template: |
+  You are a professional document analyst. Read the following document
+  and provide a structured summary.
+
+  Document:
+  {document_text}
+
+  Respond with only a JSON object with these exact keys:
+  {{
+    "summary": "2-3 sentence overview of the document",
+    "key_points": ["point 1", "point 2", "point 3"],
+    "main_argument": "the central claim or purpose of the document",
+    "sentiment": "positive, negative, or neutral",
+    "recommended_action": "one concrete action based on this document"
+  }}
+
+  Do not include any text outside the JSON object.
