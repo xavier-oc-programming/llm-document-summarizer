@@ -2,7 +2,7 @@ title: LLM Document Summarizer — LLMOps with Amazon Bedrock
 slug: llm-document-summarizer
 category: data
 date: 2026-05-26
-featured: false
+featured: true
 tags: LLM, RAG, AWS, azure, deployment, flask, web-app, zero-shot, benchmarking, model-registry, jupyter, REST-API, docker, CI-CD, deep-learning, NLP, feature-engineering
 tech_stack: Python, Amazon Bedrock, Bedrock Guardrails, MLflow, FastAPI, PyMuPDF, PyYAML, rouge-score, Uvicorn, Docker, Docker Compose, Pandas, Azure App Service, GitHub Actions, pytest
 repo_url: https://github.com/xavier-oc-programming/llm-document-summarizer
