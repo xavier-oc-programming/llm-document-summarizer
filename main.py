@@ -5,7 +5,6 @@ import boto3
 import mlflow
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from config import (
@@ -31,26 +30,23 @@ app = FastAPI(
 API_READY = False
 
 
-@app.on_event("startup")
-async def startup_event():
+async def _startup():
     global API_READY
-
     try:
         boto3.client('bedrock-runtime', region_name=BEDROCK_REGION)
     except Exception:
         pass
-
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
-
     UPLOAD_DIR.mkdir(exist_ok=True)
     EVAL_RESULTS_DIR.mkdir(exist_ok=True)
-
     try:
         load_prompt(ACTIVE_PROMPT_VERSION)
         API_READY = True
     except Exception:
         API_READY = False
+
+app.add_event_handler("startup", _startup)
 
 
 class SummarizeResponse(BaseModel):
@@ -115,11 +111,11 @@ async def summarize_pdf(file: UploadFile = File(...)):
     sentiment, and recommended action. All outputs pass through Bedrock
     Guardrails before returning — PII is anonymised, harmful content blocked.
     """
-    if not API_READY:
-        raise HTTPException(status_code=503, detail="API not ready — check AWS credentials and prompt configuration.")
-
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF.")
+
+    if not API_READY:
+        raise HTTPException(status_code=503, detail="API not ready — check AWS credentials and prompt configuration.")
 
     pdf_bytes = await file.read()
     size_mb = len(pdf_bytes) / (1024 * 1024)
