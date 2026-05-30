@@ -55,5 +55,15 @@ challenges: |
   which requires escaping curly braces in the JSON schema to prevent format errors.
 
 results: |
-  TBD — populate after running evaluate.py. Include: ROUGE-L scores for v1, v2, v3,
-  winning prompt version, average latency, guardrails firing rate on eval set.
+  Evaluated three prompt versions across five held-out documents (business report,
+  research abstract, news article, legal notice, technical README).
+
+  ROUGE-L scores: v1=0.497, v2=0.379, v3=0.504
+  ROUGE-1 scores: v1=0.595, v2=0.532, v3=0.609
+  ROUGE-2 scores: v1=0.352, v2=0.249, v3=0.350
+
+  Best prompt: v3 (ROUGE-L 0.504) — extended prompt with risk flags and audience
+  targeting consistently outperformed v1 and v2 across document types.
+  Average latency: v1=3857ms, v2=4170ms, v3=5105ms.
+  Guardrails firing rate: 0/15 calls on the eval set (no PII in eval documents).
+  Active prompt updated to v3.

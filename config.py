@@ -8,7 +8,7 @@ BEDROCK_GUARDRAIL_VERSION = '1'
 
 # Prompt versioning
 PROMPTS_DIR = Path('prompts')
-ACTIVE_PROMPT_VERSION = 'v2'  # Change to switch prompt versions
+ACTIVE_PROMPT_VERSION = 'v3'  # Change to switch prompt versions
 # Changing ACTIVE_PROMPT_VERSION is the only code change needed
 # to switch prompt versions. All other files read from this constant.
 

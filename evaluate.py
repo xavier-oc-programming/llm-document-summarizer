@@ -9,7 +9,7 @@
 
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import mlflow
@@ -134,7 +134,7 @@ def run_evaluation():
 
     # Save results to eval_results/
     EVAL_RESULTS_DIR.mkdir(exist_ok=True)
-    timestamp = datetime.utcnow().strftime('%Y%m%d_%H%M%S')
+    timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
     output_path = EVAL_RESULTS_DIR / f'eval_{timestamp}.json'
     with open(output_path, 'w') as f:
         json.dump({
