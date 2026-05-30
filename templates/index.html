@@ -312,6 +312,7 @@
   const previewBtn    = document.getElementById('previewSummariseBtn');
 
   let activeExampleKey = null;
+  let uploadedFile = null;
 
   // File upload
   fileInput.addEventListener('change', () => {
@@ -341,6 +342,7 @@
   let uploadBlobUrl = null;
 
   function showUploadedPreview(file) {
+    uploadedFile = file;
     clearExampleSelection();
     activeExampleKey = null;
     if (uploadBlobUrl) URL.revokeObjectURL(uploadBlobUrl);
@@ -377,8 +379,8 @@
       const resp = await fetch(`/static/examples/${activeExampleKey}.pdf`);
       const blob = await resp.blob();
       file = new File([blob], `${activeExampleKey}.pdf`, { type: 'application/pdf' });
-    } else if (fileInput.files.length > 0) {
-      file = fileInput.files[0];
+    } else if (uploadedFile) {
+      file = uploadedFile;
     } else {
       return;
     }
@@ -391,6 +393,7 @@
     previewCard.style.display = 'none';
     pdfFrame.src = '';
     activeExampleKey = null;
+    uploadedFile = null;
     uploadBlobUrl = null;
     clearExampleSelection();
     summariseBtn.style.display = 'block';
