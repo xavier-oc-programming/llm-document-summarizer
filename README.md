@@ -196,7 +196,7 @@ To extend the eval set, see [eval/README.md](eval/README.md).
 1. Open the AWS console → **Amazon Bedrock → Guardrails → Create guardrail**
 2. Configure:
    - **PII detection**: ANONYMIZE for Name, Email, Phone, Address
-   - **Content filters**: BLOCK for hate speech, violence, sexual content
+   - **Content filters**: input strength NONE, output strength HIGH for hate speech, violence, sexual content. Input filtering is intentionally disabled — a document summarizer must accept any document, including CVs with personal data. Only the generated summary is filtered.
    - **Grounding**: OFF
 3. Copy the Guardrail ID and set it in `config.py`:
    ```python
@@ -354,7 +354,7 @@ Tests do not require AWS credentials — `/summarize/text` returns 503 gracefull
 
 **Why ROUGE as the evaluation metric despite its limitations** — ROUGE measures lexical overlap, which is imperfect for abstractive summarization — a paraphrased but accurate summary can score low. I chose ROUGE because it is the standard benchmark for summarization tasks, it is automated (no LLM-as-judge API call required), and it produces consistent, reproducible scores across runs. The eval set and reference summaries are written to maximise ROUGE signal by using specific terms and numbers that should appear in good summaries.
 
-**Why Bedrock Guardrails over manual output filtering** — Guardrails run server-side inside Bedrock before the response is returned, which means PII redaction cannot be bypassed by a prompt injection attack on the client side. Manual filtering in application code would operate on already-returned text and would require maintaining regex patterns for each PII type. Guardrails also provide a compliance-grade audit trail.
+**Why Bedrock Guardrails over manual output filtering** — Guardrails run server-side inside Bedrock before the response is returned, which means PII redaction cannot be bypassed by a prompt injection attack on the client side. Manual filtering in application code would operate on already-returned text and would require maintaining regex patterns for each PII type. Guardrails also provide a compliance-grade audit trail. Input content filtering is intentionally set to NONE — enabling it at any strength blocked legitimate documents (CVs containing disability certificates, phone numbers, or personal contact data). The right boundary for a document summarizer is the output: accept anything, return only safe summaries.
 
 **Why MLflow for LLM tracking (same tool as classical ML — consistency)** — The credit-risk-scorer project already uses MLflow for classical ML experiment tracking. Using the same tool for LLM evaluation tracking means one UI, one mental model, and one operational system to maintain. The analogy is direct: a prompt version maps to a model version; ROUGE scores map to accuracy metrics; guardrails activity maps to data quality flags.
 

@@ -49,6 +49,12 @@ solution: |
 challenges: |
   Bedrock Guardrails require a guardrail to be created in the AWS console before
   the project runs — the guardrail ID is a config value, not a code value.
+  Input content filtering blocked legitimate documents (CVs with disability
+  certificates, phone numbers, personal data) even at MEDIUM sensitivity — the fix
+  was to disable input content filtering entirely and filter only the output.
+  Bedrock does not return a guardrail action header on invoke_model responses;
+  blocked inputs return plain text instead of JSON, requiring the body text to be
+  checked before JSON parsing.
   ROUGE metrics measure lexical overlap, not semantic quality — the eval set and
   reference summaries must be written carefully to make the scores meaningful.
   Prompt templates use Python .format()-style placeholders inside JSON structures,
