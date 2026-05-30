@@ -239,7 +239,7 @@ Summarize raw text directly — useful for testing without a PDF.
 ```bash
 curl -X POST http://localhost:8000/summarize/text \
   -H "Content-Type: application/json" \
-  -d '{"text": "Your document text here", "prompt_version": "v2"}'
+  -d '{"text": "Your document text here", "prompt_version": "v3"}'
 ```
 
 ### `GET /health`
@@ -336,7 +336,7 @@ az webapp config appsettings set --name llm-document-summarizer \
 # Package and deploy
 cd llm-document-summarizer
 zip -r deploy.zip . -x "*.git*" -x "venv/*" -x "__pycache__/*" \
-  -x "*.ipynb_checkpoints*" -x "mlruns/*" -x "uploads/*"
+  -x "*.ipynb_checkpoints*" -x "mlruns/*" -x "uploads/*" -x "eval_results/*"
 az webapp deployment source config-zip \
   --name llm-document-summarizer \
   --resource-group llm-summarizer-rg \
