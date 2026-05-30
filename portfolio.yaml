@@ -6,7 +6,7 @@ featured: true
 tags: LLM, AWS, azure, deployment, web-app, benchmarking, jupyter, REST-API, docker, CI-CD, NLP, prompt-engineering, mlops, guardrails
 tech_stack: Python, Amazon Bedrock, Bedrock Guardrails, MLflow, FastAPI, PyMuPDF, PyYAML, rouge-score, Uvicorn, Docker, Docker Compose, Pandas, Azure App Service, GitHub Actions, pytest
 repo_url: https://github.com/xavier-oc-programming/llm-document-summarizer
-live_url: https://llm-document-summarizer.azurewebsites.net
+live_url: https://llm-document-summarizer.azurewebsites.net/demo
 demo_url: https://llm-document-summarizer.azurewebsites.net/docs
 short_description: |
   PDF document summarizer using Amazon Bedrock (Claude Haiku) with production

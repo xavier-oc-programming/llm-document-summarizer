@@ -2,7 +2,7 @@
 
 PDF document summarization powered by Amazon Bedrock (Claude Haiku) with production LLMOps patterns: versioned prompt templates, automated ROUGE evaluation, Bedrock Guardrails for PII redaction and content filtering, and MLflow tracking of every inference call. Deployed on Azure App Service.
 
-**Live demo → [llm-document-summarizer.azurewebsites.net](https://llm-document-summarizer.azurewebsites.net)**
+**Live demo → [llm-document-summarizer.azurewebsites.net/demo](https://llm-document-summarizer.azurewebsites.net/demo)**
 &nbsp;&nbsp;·&nbsp;&nbsp;
 **API docs → [/docs](https://llm-document-summarizer.azurewebsites.net/docs)**
 &nbsp;&nbsp;·&nbsp;&nbsp;
