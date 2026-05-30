@@ -4,7 +4,7 @@ from pathlib import Path
 BEDROCK_REGION = 'us-east-1'
 BEDROCK_MODEL_ID = 'us.anthropic.claude-haiku-4-5-20251001-v1:0'
 BEDROCK_GUARDRAIL_ID = 'o2eo4z9blnfp'  # Set after creating in AWS console
-BEDROCK_GUARDRAIL_VERSION = '1'
+BEDROCK_GUARDRAIL_VERSION = '3'
 
 # Prompt versioning
 PROMPTS_DIR = Path('prompts')

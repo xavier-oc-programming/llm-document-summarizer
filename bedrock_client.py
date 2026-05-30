@@ -83,17 +83,10 @@ def summarize_document(
                 guardrailVersion=BEDROCK_GUARDRAIL_VERSION,
                 trace='ENABLED'
             )
-            result = json.loads(response['body'].read())
-            raw_text = result['content'][0]['text']
+            # Read body as text first — blocked responses are plain text, not JSON
+            body_text = response['body'].read().decode('utf-8')
 
-            # Guardrail action is returned in the HTTP response headers
-            guardrail_action_header = response.get('ResponseMetadata', {}) \
-                .get('HTTPHeaders', {}) \
-                .get('x-amzn-bedrock-guardrail-action', '').upper()
-
-            if guardrail_action_header == 'BLOCKED':
-                guardrails_fired = True
-                guardrails_action = 'BLOCKED'
+            if 'blocked by content policy' in body_text.lower():
                 latency_ms = int((time.time() - start_time) * 1000)
                 _log_to_mlflow(prompt_version, latency_ms, True, len(document_text), 0)
                 return {
@@ -108,7 +101,12 @@ def summarize_document(
                     "guardrails_action": "BLOCKED",
                     "model_id": BEDROCK_MODEL_ID,
                 }
-            elif guardrail_action_header == 'ANONYMIZED':
+
+            result = json.loads(body_text)
+            raw_text = result['content'][0]['text']
+
+            # Detect PII anonymisation from output token patterns
+            if '{NAME}' in raw_text or '{EMAIL}' in raw_text or '{PHONE}' in raw_text:
                 guardrails_fired = True
                 guardrails_action = 'ANONYMIZED'
 
