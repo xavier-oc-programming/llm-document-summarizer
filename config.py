@@ -12,8 +12,10 @@ ACTIVE_PROMPT_VERSION = 'v2'  # Change to switch prompt versions
 # Changing ACTIVE_PROMPT_VERSION is the only code change needed
 # to switch prompt versions. All other files read from this constant.
 
-# MLflow
-MLFLOW_TRACKING_URI = 'http://localhost:5000'
+# MLflow — local file backend by default (no server needed)
+# To use the Docker Compose MLflow server instead, set:
+#   MLFLOW_TRACKING_URI = 'http://localhost:5000'
+MLFLOW_TRACKING_URI = 'mlruns'
 MLFLOW_EXPERIMENT_NAME = 'llm-document-summarizer'
 
 # Evaluation
