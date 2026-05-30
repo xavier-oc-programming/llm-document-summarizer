@@ -348,8 +348,8 @@
     previewTitle.textContent = file.name;
     pdfFrame.src = uploadBlobUrl;
     previewCard.style.display = 'block';
-    summariseBtn.disabled = false;
-    fileName.textContent = '';
+    summariseBtn.style.display = 'none';   // hide — preview card has the CTA
+    fileName.textContent = file.name;
     results.style.display = 'none';
     hideError();
     previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -364,6 +364,7 @@
     previewTitle.textContent = title;
     pdfFrame.src = `/static/examples/${key}.pdf`;
     previewCard.style.display = 'block';
+    summariseBtn.style.display = 'none';
     previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     results.style.display = 'none';
@@ -390,7 +391,11 @@
     previewCard.style.display = 'none';
     pdfFrame.src = '';
     activeExampleKey = null;
+    uploadBlobUrl = null;
     clearExampleSelection();
+    summariseBtn.style.display = 'block';
+    summariseBtn.disabled = true;
+    fileName.textContent = '';
   }
 
   function clearExampleSelection() {
