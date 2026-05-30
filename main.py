@@ -50,13 +50,13 @@ class SummarizeResponse(BaseModel):
     main_argument: str
     sentiment: str
     recommended_action: str
-    document_type: str = None
-    confidence: str = None
-    risk_flags: list[str] = None
+    document_type: str | None = None
+    confidence: str | None = None
+    risk_flags: list[str] | None = None
     prompt_version: str
     latency_ms: int
     guardrails_fired: bool
-    guardrails_action: str = None
+    guardrails_action: str | None = None
     page_count: int
     word_count: int
     truncated: bool
@@ -72,7 +72,7 @@ class HealthResponse(BaseModel):
 
 class TextSummarizeRequest(BaseModel):
     text: str
-    prompt_version: str = None
+    prompt_version: str | None = None
 
 
 @app.get("/", include_in_schema=False)
