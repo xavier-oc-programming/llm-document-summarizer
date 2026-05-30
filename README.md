@@ -296,9 +296,10 @@ AWS credentials are passed as environment variables — never hardcoded. Set the
 # Create resource group and app service plan
 az group create --name llm-summarizer-rg --location westeurope
 az appservice plan create --name llm-summarizer-plan \
-  --resource-group llm-summarizer-rg --sku B1 --is-linux
+  --resource-group llm-summarizer-rg --sku F1 --is-linux
 
-# Scale to F1 via portal after creation if needed
+# F1 is the free tier — no monthly charge. Cold starts take ~30s after inactivity.
+# Scale to B1 for always-on: az appservice plan update --name llm-summarizer-plan --resource-group llm-summarizer-rg --sku B1
 
 # Create web app
 az webapp create --name llm-document-summarizer \
