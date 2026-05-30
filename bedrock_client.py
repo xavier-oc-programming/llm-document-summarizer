@@ -75,50 +75,25 @@ def summarize_document(
 
     try:
         if apply_guardrails:
-            response = bedrock.invoke_model_with_response_stream(
+            # invoke_model supports guardrails via parameters; action returned in response headers
+            response = bedrock.invoke_model(
                 modelId=BEDROCK_MODEL_ID,
                 body=body,
                 guardrailIdentifier=BEDROCK_GUARDRAIL_ID,
                 guardrailVersion=BEDROCK_GUARDRAIL_VERSION,
                 trace='ENABLED'
             )
+            result = json.loads(response['body'].read())
+            raw_text = result['content'][0]['text']
 
-            full_text = ''
-            blocked = False
-            anonymized = False
+            # Guardrail action is returned in the HTTP response headers
+            guardrail_action_header = response.get('ResponseMetadata', {}) \
+                .get('HTTPHeaders', {}) \
+                .get('x-amzn-bedrock-guardrail-action', '').upper()
 
-            stream = response.get('body')
-            for event in stream:
-                chunk = event.get('chunk')
-                if chunk:
-                    chunk_data = json.loads(chunk['bytes'].decode())
-                    chunk_type = chunk_data.get('type')
-
-                    if chunk_type == 'content_block_delta':
-                        delta = chunk_data.get('delta', {})
-                        if delta.get('type') == 'text_delta':
-                            full_text += delta.get('text', '')
-
-                    elif chunk_type == 'guardrail_trace':
-                        trace_data = chunk_data.get('guardrailTrace', {})
-                        action = trace_data.get('action', '')
-                        if action == 'BLOCKED':
-                            blocked = True
-                            guardrails_fired = True
-                            guardrails_action = 'BLOCKED'
-                        elif action == 'ANONYMIZED':
-                            anonymized = True
-                            guardrails_fired = True
-                            guardrails_action = 'ANONYMIZED'
-
-                    elif chunk_type == 'message_delta':
-                        stop_reason = chunk_data.get('delta', {}).get('stop_reason')
-                        if stop_reason == 'guardrail_intervened':
-                            blocked = True
-                            guardrails_fired = True
-                            guardrails_action = 'BLOCKED'
-
-            if blocked:
+            if guardrail_action_header == 'BLOCKED':
+                guardrails_fired = True
+                guardrails_action = 'BLOCKED'
                 latency_ms = int((time.time() - start_time) * 1000)
                 _log_to_mlflow(prompt_version, latency_ms, True, len(document_text), 0)
                 return {
@@ -133,8 +108,9 @@ def summarize_document(
                     "guardrails_action": "BLOCKED",
                     "model_id": BEDROCK_MODEL_ID,
                 }
-
-            raw_text = full_text
+            elif guardrail_action_header == 'ANONYMIZED':
+                guardrails_fired = True
+                guardrails_action = 'ANONYMIZED'
 
         else:
             response = bedrock.invoke_model(
@@ -184,7 +160,7 @@ def _log_to_mlflow(prompt_version: str, latency_ms: int, guardrails_fired: bool,
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
         mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
         timestamp = datetime.utcnow().strftime('%Y%m%d_%H%M%S')
-        with mlflow.start_run(run_name=f'summarize_{prompt_version}_{timestamp}', nested=True):
+        with mlflow.start_run(run_name=f'summarize_{prompt_version}_{timestamp}'):
             mlflow.log_param('prompt_version', prompt_version)
             mlflow.log_param('model_id', BEDROCK_MODEL_ID)
             mlflow.log_metric('latency_ms', latency_ms)
