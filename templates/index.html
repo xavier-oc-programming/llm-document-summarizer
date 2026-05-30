@@ -316,10 +316,7 @@
   // File upload
   fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
-      fileName.textContent = fileInput.files[0].name;
-      summariseBtn.disabled = false;
-      clearExampleSelection();
-      closePreview();
+      showUploadedPreview(fileInput.files[0]);
     }
   });
 
@@ -331,19 +328,32 @@
     const files = e.dataTransfer.files;
     if (files.length > 0 && files[0].type === 'application/pdf') {
       fileInput.files = files;
-      fileName.textContent = files[0].name;
-      summariseBtn.disabled = false;
-      clearExampleSelection();
-      closePreview();
+      showUploadedPreview(files[0]);
     }
   });
 
   summariseBtn.addEventListener('click', async () => {
     if (!fileInput.files.length) return;
-    const formData = new FormData();
-    formData.append('file', fileInput.files[0]);
-    await callSummarize('/summarize', formData, 'pdf');
+    showUploadedPreview(fileInput.files[0]);
   });
+
+  // Uploaded PDF preview
+  let uploadBlobUrl = null;
+
+  function showUploadedPreview(file) {
+    clearExampleSelection();
+    activeExampleKey = null;
+    if (uploadBlobUrl) URL.revokeObjectURL(uploadBlobUrl);
+    uploadBlobUrl = URL.createObjectURL(file);
+    previewTitle.textContent = file.name;
+    pdfFrame.src = uploadBlobUrl;
+    previewCard.style.display = 'block';
+    summariseBtn.disabled = false;
+    fileName.textContent = '';
+    results.style.display = 'none';
+    hideError();
+    previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // Example PDF loading
   function loadExample(key, title) {
@@ -361,11 +371,16 @@
   }
 
   previewBtn.addEventListener('click', async () => {
-    if (!activeExampleKey) return;
-    // Fetch the PDF bytes and POST to /summarize
-    const resp = await fetch(`/static/examples/${activeExampleKey}.pdf`);
-    const blob = await resp.blob();
-    const file = new File([blob], `${activeExampleKey}.pdf`, { type: 'application/pdf' });
+    let file;
+    if (activeExampleKey) {
+      const resp = await fetch(`/static/examples/${activeExampleKey}.pdf`);
+      const blob = await resp.blob();
+      file = new File([blob], `${activeExampleKey}.pdf`, { type: 'application/pdf' });
+    } else if (fileInput.files.length > 0) {
+      file = fileInput.files[0];
+    } else {
+      return;
+    }
     const formData = new FormData();
     formData.append('file', file);
     await callSummarize('/summarize', formData, 'pdf');
