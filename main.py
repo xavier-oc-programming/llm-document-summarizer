@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 import boto3
-import mlflow
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -11,8 +10,6 @@ from config import (
     ACTIVE_PROMPT_VERSION,
     BEDROCK_MODEL_ID,
     BEDROCK_REGION,
-    MLFLOW_TRACKING_URI,
-    MLFLOW_EXPERIMENT_NAME,
     UPLOAD_DIR,
     MAX_PDF_SIZE_MB,
     EVAL_RESULTS_DIR,
@@ -36,8 +33,6 @@ async def _startup():
         boto3.client('bedrock-runtime', region_name=BEDROCK_REGION)
     except Exception:
         pass
-    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-    mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
     UPLOAD_DIR.mkdir(exist_ok=True)
     EVAL_RESULTS_DIR.mkdir(exist_ok=True)
     try:
