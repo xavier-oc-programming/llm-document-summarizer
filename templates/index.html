@@ -419,12 +419,13 @@
         : { method: 'POST', body };
 
       const r = await fetch(url, opts);
-      const data = await r.json();
+      let data;
+      try { data = await r.json(); } catch { data = {}; }
 
-      if (!r.ok) { showError(data.detail || `Error ${r.status}`); return; }
+      if (!r.ok) { showError(data.detail || `Error ${r.status} — ${r.statusText}`); return; }
       renderResults(data);
     } catch (e) {
-      showError('Network error — is the API running?');
+      showError('Network error — check your connection and try again.');
     } finally {
       setLoading(false);
     }

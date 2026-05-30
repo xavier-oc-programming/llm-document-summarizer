@@ -16,7 +16,7 @@ from config import (
     EVAL_RESULTS_DIR,
 )
 from pdf_extractor import extract_text_from_bytes
-from bedrock_client import summarize_document
+from bedrock_client import summarize_document, BedrockCallError
 from prompt_manager import list_prompt_versions, load_prompt
 
 app = FastAPI(
@@ -126,7 +126,10 @@ async def summarize_pdf(file: UploadFile = File(...)):
     except RuntimeError as e:
         raise HTTPException(status_code=422, detail=str(e))
 
-    result = summarize_document(document_text=extraction['text'])
+    try:
+        result = summarize_document(document_text=extraction['text'])
+    except BedrockCallError as e:
+        raise HTTPException(status_code=502, detail=str(e))
 
     return SummarizeResponse(
         summary=result.get('summary', ''),
@@ -157,10 +160,13 @@ async def summarize_text(request: TextSummarizeRequest):
     if not API_READY:
         raise HTTPException(status_code=503, detail="API not ready — check AWS credentials and prompt configuration.")
 
-    result = summarize_document(
-        document_text=request.text,
-        prompt_version=request.prompt_version,
-    )
+    try:
+        result = summarize_document(
+            document_text=request.text,
+            prompt_version=request.prompt_version,
+        )
+    except BedrockCallError as e:
+        raise HTTPException(status_code=502, detail=str(e))
 
     word_count = len(request.text.split())
 
