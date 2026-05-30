@@ -21,29 +21,11 @@
       text-align: center;
     }
 
-    header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.4rem;
-    }
+    header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    header p { opacity: 0.88; font-size: 0.95rem; }
+    header .guardrails-note { margin-top: 0.6rem; font-size: 0.8rem; opacity: 0.75; }
 
-    header p {
-      opacity: 0.88;
-      font-size: 0.95rem;
-    }
-
-    header .guardrails-note {
-      margin-top: 0.6rem;
-      font-size: 0.8rem;
-      opacity: 0.75;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
+    .container { max-width: 860px; margin: 0 auto; padding: 1.5rem; }
 
     .card {
       background: white;
@@ -53,7 +35,7 @@
       margin-bottom: 1.2rem;
     }
 
-    /* Upload area */
+    /* Upload zone */
     .upload-zone {
       border: 2px dashed #c4b5f4;
       border-radius: 10px;
@@ -64,285 +46,164 @@
       position: relative;
     }
 
-    .upload-zone:hover, .upload-zone.dragover {
-      border-color: #6C3FC5;
-      background: #faf8ff;
-    }
+    .upload-zone:hover, .upload-zone.dragover { border-color: #6C3FC5; background: #faf8ff; }
 
     .upload-zone input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
     }
 
-    .upload-icon {
-      font-size: 2.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .upload-text {
-      font-size: 0.95rem;
-      color: #555;
-    }
-
+    .upload-icon { font-size: 2.2rem; margin-bottom: 0.6rem; }
+    .upload-text { font-size: 0.95rem; color: #555; }
     .upload-text strong { color: #6C3FC5; }
-
-    .upload-meta {
-      font-size: 0.78rem;
-      color: #888;
-      margin-top: 0.4rem;
-    }
+    .upload-meta { font-size: 0.78rem; color: #888; margin-top: 0.4rem; }
 
     .prompt-badge {
       display: inline-block;
-      background: #ede9fe;
-      color: #6C3FC5;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      margin-top: 0.8rem;
+      background: #ede9fe; color: #6C3FC5;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 0.2rem 0.6rem; border-radius: 999px; margin-top: 0.8rem;
     }
 
-    .file-name {
-      margin-top: 0.6rem;
-      font-size: 0.85rem;
-      color: #6C3FC5;
-      font-weight: 500;
-    }
+    .file-name { margin-top: 0.6rem; font-size: 0.85rem; color: #6C3FC5; font-weight: 500; }
 
     .btn {
-      display: block;
-      width: 100%;
-      padding: 0.85rem;
-      background: #6C3FC5;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, opacity 0.2s;
-      margin-top: 1rem;
+      display: block; width: 100%; padding: 0.85rem;
+      background: #6C3FC5; color: white; border: none;
+      border-radius: 8px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, opacity 0.2s; margin-top: 1rem;
     }
-
     .btn:hover { background: #5a34a8; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .btn-sm {
-      display: inline-block;
-      padding: 0.45rem 0.9rem;
-      background: #ede9fe;
-      color: #6C3FC5;
-      border: 1px solid #c4b5f4;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
-      margin: 0.25rem;
+      display: inline-block; padding: 0.45rem 0.9rem;
+      background: #ede9fe; color: #6C3FC5;
+      border: 1px solid #c4b5f4; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; margin: 0.25rem;
+    }
+    .btn-sm:hover { background: #ddd6fe; }
+    .btn-sm.active { background: #6C3FC5; color: white; border-color: #6C3FC5; }
+
+    .examples-label { font-size: 0.8rem; color: #888; margin-bottom: 0.3rem; }
+
+    /* PDF Preview */
+    #previewCard { display: none; }
+
+    .preview-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
     }
 
-    .btn-sm:hover { background: #ddd6fe; }
+    .preview-title {
+      font-size: 0.9rem; font-weight: 700; color: #1a1a2e;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
 
-    .examples-label {
-      font-size: 0.8rem;
-      color: #888;
-      margin-bottom: 0.3rem;
+    .preview-title .pdf-icon {
+      background: #6C3FC5; color: white;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.15rem 0.4rem; border-radius: 4px;
+    }
+
+    .preview-close {
+      background: none; border: none; color: #888;
+      font-size: 1.2rem; cursor: pointer; padding: 0.2rem 0.4rem;
+      border-radius: 4px; transition: background 0.15s;
+    }
+    .preview-close:hover { background: #f0eeff; color: #6C3FC5; }
+
+    .pdf-frame {
+      width: 100%; height: 420px;
+      border: 1px solid #e8e3ff; border-radius: 8px;
+      display: block;
     }
 
     /* Results */
     #results { display: none; }
 
     .type-badge {
-      display: inline-block;
-      background: #6C3FC5;
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
+      display: inline-block; background: #6C3FC5; color: white;
+      font-size: 0.75rem; font-weight: 700;
+      padding: 0.25rem 0.7rem; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;
     }
 
     .section-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #888;
-      margin-bottom: 0.4rem;
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: #888; margin-bottom: 0.4rem;
     }
 
-    .summary-text {
-      font-size: 0.97rem;
-      line-height: 1.65;
-      color: #222;
-      margin-bottom: 1rem;
-    }
+    .summary-text { font-size: 0.97rem; line-height: 1.65; color: #222; margin-bottom: 1rem; }
 
-    .key-points {
-      list-style: none;
-      margin-bottom: 1rem;
-    }
-
+    .key-points { list-style: none; margin-bottom: 1rem; }
     .key-points li {
-      padding: 0.35rem 0;
-      padding-left: 1.2rem;
-      position: relative;
-      font-size: 0.92rem;
-      line-height: 1.5;
-      color: #333;
+      padding: 0.35rem 0 0.35rem 1.2rem;
+      position: relative; font-size: 0.92rem; line-height: 1.5; color: #333;
     }
-
-    .key-points li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: #6C3FC5;
-    }
+    .key-points li::before { content: '▸'; position: absolute; left: 0; color: #6C3FC5; }
 
     .argument-box {
-      background: #faf8ff;
-      border-left: 3px solid #6C3FC5;
-      padding: 0.75rem 1rem;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.92rem;
-      color: #333;
-      margin-bottom: 1rem;
+      background: #faf8ff; border-left: 3px solid #6C3FC5;
+      padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;
+      font-size: 0.92rem; color: #333; margin-bottom: 1rem;
     }
 
-    .sentiment-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .sentiment-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
+    .sentiment-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+    .sentiment-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     .sentiment-positive { background: #22c55e; }
     .sentiment-negative { background: #ef4444; }
     .sentiment-neutral  { background: #94a3b8; }
-
-    .sentiment-label {
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-transform: capitalize;
-    }
+    .sentiment-label { font-size: 0.88rem; font-weight: 600; text-transform: capitalize; }
 
     .action-box {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      font-size: 0.92rem;
-      color: #166534;
-      margin-bottom: 1rem;
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; padding: 0.75rem 1rem;
+      font-size: 0.92rem; color: #166534; margin-bottom: 1rem;
     }
 
     .risk-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
+      background: #fffbeb; border: 1px solid #fde68a;
+      border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem;
     }
-
-    .risk-box .risk-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #92400e;
-      margin-bottom: 0.4rem;
-    }
-
-    .risk-box ul {
-      list-style: none;
-    }
-
-    .risk-box ul li {
-      font-size: 0.88rem;
-      color: #78350f;
-      padding: 0.2rem 0;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .risk-box ul li::before {
-      content: '⚠';
-      position: absolute;
-      left: 0;
-      font-size: 0.75rem;
-    }
+    .risk-box .risk-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #92400e; margin-bottom: 0.4rem; }
+    .risk-box ul { list-style: none; }
+    .risk-box ul li { font-size: 0.88rem; color: #78350f; padding: 0.2rem 0 0.2rem 1.2rem; position: relative; }
+    .risk-box ul li::before { content: '⚠'; position: absolute; left: 0; font-size: 0.75rem; }
 
     .guardrails-banner {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 6px;
-      padding: 0.5rem 0.75rem;
-      font-size: 0.82rem;
-      color: #92400e;
-      margin-bottom: 1rem;
+      background: #fffbeb; border: 1px solid #fde68a;
+      border-radius: 6px; padding: 0.5rem 0.75rem;
+      font-size: 0.82rem; color: #92400e; margin-bottom: 1rem;
     }
 
     .result-footer {
-      font-size: 0.75rem;
-      color: #aaa;
-      border-top: 1px solid #f0eeff;
-      padding-top: 0.75rem;
-      margin-top: 0.5rem;
+      font-size: 0.75rem; color: #aaa;
+      border-top: 1px solid #f0eeff; padding-top: 0.75rem; margin-top: 0.5rem;
     }
 
     /* Spinner */
-    .spinner {
-      display: none;
-      text-align: center;
-      padding: 1.5rem;
-      color: #6C3FC5;
-      font-size: 0.9rem;
-    }
-
+    .spinner { display: none; text-align: center; padding: 1.5rem; color: #6C3FC5; font-size: 0.9rem; }
     .spinner.active { display: block; }
-
     @keyframes spin { to { transform: rotate(360deg); } }
-
     .spin-icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #c4b5f4;
-      border-top-color: #6C3FC5;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-      margin-right: 0.5rem;
+      display: inline-block; width: 20px; height: 20px;
+      border: 2px solid #c4b5f4; border-top-color: #6C3FC5;
+      border-radius: 50%; animation: spin 0.8s linear infinite;
+      vertical-align: middle; margin-right: 0.5rem;
     }
 
     .error-box {
-      background: #fef2f2;
-      border: 1px solid #fca5a5;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      color: #991b1b;
-      font-size: 0.88rem;
-      display: none;
-      margin-top: 0.75rem;
+      background: #fef2f2; border: 1px solid #fca5a5;
+      border-radius: 8px; padding: 0.75rem 1rem;
+      color: #991b1b; font-size: 0.88rem; display: none; margin-top: 0.75rem;
     }
 
     @media (max-width: 600px) {
       header h1 { font-size: 1.4rem; }
       .container { padding: 1rem; }
+      .pdf-frame { height: 280px; }
     }
   </style>
 </head>
@@ -361,9 +222,7 @@
     <div class="upload-zone" id="uploadZone">
       <input type="file" id="fileInput" accept=".pdf" />
       <div class="upload-icon">📄</div>
-      <div class="upload-text">
-        Drag & drop a PDF, or <strong>browse</strong>
-      </div>
+      <div class="upload-text">Drag & drop a PDF, or <strong>browse</strong></div>
       <div class="upload-meta">Maximum file size: 10 MB · PDF only</div>
       <div id="promptBadge" class="prompt-badge">Loading prompt version…</div>
     </div>
@@ -373,11 +232,24 @@
     <div class="error-box" id="errorBox"></div>
 
     <div style="margin-top: 1rem;">
-      <div class="examples-label">Try an example (no upload needed):</div>
-      <button class="btn-sm" onclick="runExample('business')">Business report</button>
-      <button class="btn-sm" onclick="runExample('research')">Research abstract</button>
-      <button class="btn-sm" onclick="runExample('legal')">Legal notice</button>
+      <div class="examples-label">Or try an example PDF:</div>
+      <button class="btn-sm" id="ex-business" onclick="loadExample('business', 'Q3 2025 Sales Report — Northgate Technologies')">Business report</button>
+      <button class="btn-sm" id="ex-research" onclick="loadExample('research', 'Research Abstract — Customer Churn Prediction')">Research abstract</button>
+      <button class="btn-sm" id="ex-legal"    onclick="loadExample('legal',    'Terms of Service Update — CloudVault')">Legal notice</button>
     </div>
+  </div>
+
+  <!-- PDF Preview card -->
+  <div class="card" id="previewCard">
+    <div class="preview-header">
+      <div class="preview-title">
+        <span class="pdf-icon">PDF</span>
+        <span id="previewTitle"></span>
+      </div>
+      <button class="preview-close" onclick="closePreview()" title="Close preview">✕</button>
+    </div>
+    <iframe id="pdfFrame" class="pdf-frame" src=""></iframe>
+    <button class="btn" id="previewSummariseBtn" style="margin-top:1rem">Summarise this document</button>
   </div>
 
   <!-- Spinner -->
@@ -387,9 +259,7 @@
 
   <!-- Results -->
   <div class="card" id="results">
-
     <div id="guardrailsBanner" class="guardrails-banner" style="display:none"></div>
-
     <div id="typeBadge" class="type-badge"></div>
 
     <div class="section-label">Summary</div>
@@ -423,34 +293,33 @@
 </div>
 
 <script>
-  const EXAMPLES = {
-    business: `NORTHGATE TECHNOLOGIES — Q3 2025 SALES REPORT\n\nNorthgate Technologies posted Q3 2025 revenue of $47.3 million, representing a 12.4% increase over Q3 2024. The quarter marks the fifth consecutive period of double-digit year-over-year growth.\n\nCloud subscription revenue reached $31.2 million, representing 66% of total revenue, up from 58% in Q3 2024. Management reaffirms full-year 2025 guidance of $185–188 million in revenue. Operating margin expanded to 21.3%, up from 19.7% in the prior year quarter.`,
-    research: `ABSTRACT: Predicting Customer Churn in Subscription Services Using Ensemble Methods\n\nWe trained and evaluated five model architectures on a proprietary dataset of 84,000 B2B SaaS customers observed over 18 months. The XGBoost model with behavioural features achieved AUC-ROC of 0.891, compared to 0.714 for the baseline logistic regression on demographic features only. Feature importance analysis identified session frequency in the 30 days prior to renewal as the single strongest predictor. These findings suggest that real-time behavioural monitoring in the pre-renewal window provides substantially more predictive signal than static demographic profiling.`,
-    legal: `NOTICE OF TERMS OF SERVICE UPDATE — EFFECTIVE 1 JULY 2026\n\nCloudVault Storage Services is updating its Terms of Service. KEY CHANGES: The free tier data retention period is changing from 90 days to 30 days for inactive accounts. CloudVault will share aggregated, anonymised usage metadata with third-party analytics partners. Free tier API calls are now limited to 500 requests per day, down from 1,000. All disputes are now subject to binding arbitration in California. No action is required to continue using CloudVault. If you do not wish to accept these updated terms, you must delete your account before 1 July 2026.`
-  };
-
   // Fetch active prompt version
   fetch('/api/active-prompt')
     .then(r => r.json())
-    .then(d => {
-      document.getElementById('promptBadge').textContent = `Active: ${d.version} — ${d.description}`;
-    })
-    .catch(() => {
-      document.getElementById('promptBadge').textContent = 'Prompt version unavailable';
-    });
+    .then(d => { document.getElementById('promptBadge').textContent = `Active: ${d.version} — ${d.description}`; })
+    .catch(() => { document.getElementById('promptBadge').textContent = 'Prompt version unavailable'; });
 
-  const fileInput = document.getElementById('fileInput');
-  const summariseBtn = document.getElementById('summariseBtn');
-  const fileName = document.getElementById('fileName');
-  const uploadZone = document.getElementById('uploadZone');
-  const spinner = document.getElementById('spinner');
-  const results = document.getElementById('results');
-  const errorBox = document.getElementById('errorBox');
+  const fileInput     = document.getElementById('fileInput');
+  const summariseBtn  = document.getElementById('summariseBtn');
+  const fileName      = document.getElementById('fileName');
+  const uploadZone    = document.getElementById('uploadZone');
+  const spinner       = document.getElementById('spinner');
+  const results       = document.getElementById('results');
+  const errorBox      = document.getElementById('errorBox');
+  const previewCard   = document.getElementById('previewCard');
+  const pdfFrame      = document.getElementById('pdfFrame');
+  const previewTitle  = document.getElementById('previewTitle');
+  const previewBtn    = document.getElementById('previewSummariseBtn');
 
+  let activeExampleKey = null;
+
+  // File upload
   fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
       fileName.textContent = fileInput.files[0].name;
       summariseBtn.disabled = false;
+      clearExampleSelection();
+      closePreview();
     }
   });
 
@@ -464,6 +333,8 @@
       fileInput.files = files;
       fileName.textContent = files[0].name;
       summariseBtn.disabled = false;
+      clearExampleSelection();
+      closePreview();
     }
   });
 
@@ -474,11 +345,46 @@
     await callSummarize('/summarize', formData, 'pdf');
   });
 
-  async function runExample(type) {
-    const text = EXAMPLES[type];
-    await callSummarize('/summarize/text', JSON.stringify({ text }), 'text');
+  // Example PDF loading
+  function loadExample(key, title) {
+    activeExampleKey = key;
+    clearExampleSelection();
+    document.getElementById(`ex-${key}`).classList.add('active');
+
+    previewTitle.textContent = title;
+    pdfFrame.src = `/static/examples/${key}.pdf`;
+    previewCard.style.display = 'block';
+    previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    results.style.display = 'none';
+    hideError();
   }
 
+  previewBtn.addEventListener('click', async () => {
+    if (!activeExampleKey) return;
+    // Fetch the PDF bytes and POST to /summarize
+    const resp = await fetch(`/static/examples/${activeExampleKey}.pdf`);
+    const blob = await resp.blob();
+    const file = new File([blob], `${activeExampleKey}.pdf`, { type: 'application/pdf' });
+    const formData = new FormData();
+    formData.append('file', file);
+    await callSummarize('/summarize', formData, 'pdf');
+  });
+
+  function closePreview() {
+    previewCard.style.display = 'none';
+    pdfFrame.src = '';
+    activeExampleKey = null;
+    clearExampleSelection();
+  }
+
+  function clearExampleSelection() {
+    ['business', 'research', 'legal'].forEach(k => {
+      document.getElementById(`ex-${k}`).classList.remove('active');
+    });
+  }
+
+  // Summarize
   async function callSummarize(url, body, mode) {
     setLoading(true);
     hideError();
@@ -492,11 +398,7 @@
       const r = await fetch(url, opts);
       const data = await r.json();
 
-      if (!r.ok) {
-        showError(data.detail || `Error ${r.status}`);
-        return;
-      }
-
+      if (!r.ok) { showError(data.detail || `Error ${r.status}`); return; }
       renderResults(data);
     } catch (e) {
       showError('Network error — is the API running?');
@@ -506,7 +408,6 @@
   }
 
   function renderResults(d) {
-    // Guardrails banner
     const banner = document.getElementById('guardrailsBanner');
     if (d.guardrails_fired) {
       banner.textContent = `⚠ Guardrails applied: ${d.guardrails_action}`;
@@ -515,14 +416,9 @@
       banner.style.display = 'none';
     }
 
-    // Type badge
     const typeBadge = document.getElementById('typeBadge');
-    if (d.document_type) {
-      typeBadge.textContent = d.document_type;
-      typeBadge.style.display = 'inline-block';
-    } else {
-      typeBadge.style.display = 'none';
-    }
+    if (d.document_type) { typeBadge.textContent = d.document_type; typeBadge.style.display = 'inline-block'; }
+    else { typeBadge.style.display = 'none'; }
 
     document.getElementById('summaryText').textContent = d.summary || '—';
 
@@ -536,50 +432,39 @@
 
     document.getElementById('mainArgument').textContent = d.main_argument || '—';
 
-    const dot = document.getElementById('sentimentDot');
-    const label = document.getElementById('sentimentLabel');
     const s = (d.sentiment || 'neutral').toLowerCase();
-    dot.className = `sentiment-dot sentiment-${s}`;
-    label.textContent = s;
-
+    document.getElementById('sentimentDot').className = `sentiment-dot sentiment-${s}`;
+    document.getElementById('sentimentLabel').textContent = s;
     document.getElementById('recommendedAction').textContent = d.recommended_action || '—';
 
-    // Risk flags
     const riskSection = document.getElementById('riskSection');
     const riskList = document.getElementById('riskFlags');
     if (d.risk_flags && d.risk_flags.length > 0) {
       riskList.innerHTML = '';
       d.risk_flags.forEach(flag => {
-        const li = document.createElement('li');
-        li.textContent = flag;
-        riskList.appendChild(li);
+        const li = document.createElement('li'); li.textContent = flag; riskList.appendChild(li);
       });
       riskSection.style.display = 'block';
     } else {
       riskSection.style.display = 'none';
     }
 
-    // Footer
     const conf = d.confidence ? ` · Confidence: ${d.confidence}` : '';
     document.getElementById('resultFooter').textContent =
-      `Prompt: ${d.prompt_version} · Latency: ${d.latency_ms}ms · Model: Claude Haiku${conf}`;
+      `Prompt: ${d.prompt_version} · Latency: ${d.latency_ms}ms · Model: Claude Haiku · Pages: ${d.page_count} · Words: ${d.word_count}${conf}`;
 
     results.style.display = 'block';
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function setLoading(on) {
     spinner.className = on ? 'spinner active' : 'spinner';
     summariseBtn.disabled = on;
+    previewBtn.disabled = on;
   }
 
-  function showError(msg) {
-    errorBox.textContent = msg;
-    errorBox.style.display = 'block';
-  }
-
-  function hideError() {
-    errorBox.style.display = 'none';
-  }
+  function showError(msg) { errorBox.textContent = msg; errorBox.style.display = 'block'; }
+  function hideError() { errorBox.style.display = 'none'; }
 </script>
 </body>
 </html>

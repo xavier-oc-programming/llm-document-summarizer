@@ -4,6 +4,7 @@ from pathlib import Path
 import boto3
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from config import (
@@ -42,6 +43,7 @@ async def _startup():
         API_READY = False
 
 app.add_event_handler("startup", _startup)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 class SummarizeResponse(BaseModel):
